@@ -1,0 +1,222 @@
+package pro.sky.java.course1.coursework1;
+
+import java.util.Scanner;
+
+import static java.lang.Integer.*;
+
+public class EmployeeBook {
+    Scanner in = new Scanner(System.in);
+
+    private final int SIZE = 10;
+    private final Employee[] employees = new Employee[SIZE];
+    private final int inDepartment = 3;
+    private final int inPercent = 12;
+    private final int inCompareNumber = 28_000;
+
+
+    public void addEmployee(Employee employee) {
+        int index = -1;
+
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] == null) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index < 0) {
+            System.out.println("В справочнике нет места.");
+        }
+
+        employees[index] = employee;
+        System.out.println("Новый сотрудник " + employee.getEmployeeFio() + " добавлен.");
+    }
+
+
+    public void printEployeesList() {
+        for (Employee employee: employees) {
+            System.out.println(employee);
+        }
+    }
+
+    public double calculateSalarySum() {
+        double salarySum = 0;
+        for (Employee employee : employees) {
+            salarySum = salarySum + employee.getEmployeeSalary();
+        }
+        return salarySum;
+    }
+
+    public String findMinSalary() {
+
+        String minSalaryEmployee = null;
+        int index = 0;
+        double minSalary = employees[0].getEmployeeSalary();
+        for (int i = 1; i < employees.length; i++) {
+            if (minSalary > employees[i].getEmployeeSalary()) {
+
+                minSalary = employees[i].getEmployeeSalary();
+                index = i;
+                minSalaryEmployee = employees[index].getEmployeeFio();
+            }
+        }
+        return "Сотрудник " + minSalaryEmployee + " имеет минимальную ЗП (" + minSalary + ")";
+    }
+
+    public String findMaxSalary() {
+        String maxSalaryEmployee = null;
+        int index = 0;
+        double maxSalary = employees[0].getEmployeeSalary();
+        for (int i = 1; i < employees.length; i++) {
+            if (maxSalary < employees[i].getEmployeeSalary()) {
+                maxSalary = employees[i].getEmployeeSalary();
+                index = i;
+                maxSalaryEmployee = employees[index].getEmployeeFio();
+            }
+        }
+        return "Сотрудник " + maxSalaryEmployee + " имеет максимальную ЗП (" + maxSalary + ")";
+    }
+
+
+    public double calculateAverageSalaryValue() {
+        double averageSalaryValue;
+        averageSalaryValue = calculateSalarySum() / SIZE;
+        return averageSalaryValue;
+    }
+
+    public void printEmployeeFio() {
+        for (Employee employee : employees) {
+            System.out.println(employee.getEmployeeFio());
+        }
+    }
+
+    public void indexSalary() {
+        double indexPercent = 0.1;
+        for (Employee employee : employees) {
+            employee.setEmployeeSalary(employee.getEmployeeSalary() + employee.getEmployeeSalary() * indexPercent);
+            System.out.println(employee.getEmployeeFio() + " " + employee.getEmployeeSalary());
+        }
+    }
+
+
+    public String findMinSalaryEmployeeInDep() {
+
+        int index;
+        double minSalary = MAX_VALUE;
+        String minSalaryEmployee = null;
+
+        for (int i = 0; i < employees.length; i++) {
+
+            if (employees[i].getEmployeeDepartment() == inDepartment && minSalary > employees[i].getEmployeeSalary()) {
+
+                minSalary = employees[i].getEmployeeSalary();
+                index = i;
+                minSalaryEmployee = employees[index].getEmployeeFio();
+            }
+        }
+        return "Сотрудник " + minSalaryEmployee + " отдела " + inDepartment + " имеет минимальную ЗП (" +
+                minSalary + ")";
+    }
+
+    public String findMaxSalaryEmployeeInDep() {
+
+        int index;
+        double maxSalary = MIN_VALUE;
+        String maxSalaryEmployee = null;
+
+        for (int i = 0; i < employees.length; i++) {
+
+            if (employees[i].getEmployeeDepartment() == inDepartment && maxSalary < employees[i].getEmployeeSalary()) {
+
+                maxSalary = employees[i].getEmployeeSalary();
+                index = i;
+                maxSalaryEmployee = employees[index].getEmployeeFio();
+            }
+        }
+        return "Сотрудник " + maxSalaryEmployee + " отдела " + inDepartment + " имеет максимальную ЗП (" + maxSalary +
+                ")";
+    }
+
+    // Затраты на ЗП по отделу
+    public String calculateSalarySumInDep() {
+        double salarySumInDep = 0;
+        for (Employee employee : employees) {
+            if (employee.getEmployeeDepartment() == inDepartment) {
+                salarySumInDep = salarySumInDep + employee.getEmployeeSalary();
+            }
+        }
+        return "Затраты на зарплаты по отделу " + salarySumInDep;
+    }
+
+    // Средняя ЗП по одтелу
+    public String calculateAverageSalaryValueInDep() {
+        int index = 0;
+        double sum = 0.0;
+        double averageSalaryValueInDep;
+
+        for (Employee employee : employees) {
+
+            if (employee.getEmployeeDepartment() == inDepartment) {
+                sum = sum + employee.getEmployeeSalary();
+                index = index + 1;
+            }
+
+        }
+        averageSalaryValueInDep = sum / index;
+        return "Средняя зарплата по отделу " + averageSalaryValueInDep;
+    }
+
+    // Переиндексация ЗП по отделу
+
+
+    public double getInCompareNumber() {
+        return inCompareNumber;
+    }
+
+    public void calculateIndexEmployeeSalaryInDep() {
+        double indexPercent = inPercent / 100;
+        for (Employee employee : employees) {
+            if (employee.getEmployeeDepartment() == inDepartment) {
+                employee.setEmployeeSalary(employee.getEmployeeSalary() + employee.getEmployeeSalary() * indexPercent);
+
+            }
+        }
+    }
+
+    public void printEmployeesListDep() {
+        for (Employee employee : employees) {
+            if (employee.getEmployeeDepartment() == inDepartment) {
+                System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
+                        employee.getEmployeeSalary());
+            }
+        }
+    }
+
+    // Вывод сотрудников с ЗП меньше полученного числа
+    public void printEmployeesLess() {
+        for (Employee employee : employees) {
+            if (employee.getEmployeeSalary() < inCompareNumber) {
+                System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
+                        employee.getEmployeeSalary());
+            }
+        }
+    }
+
+    // Вывод сотрудников с ЗП больше полученного числа
+    public void printEmployeesMore() {
+        for (Employee employee : employees) {
+            if (employee.getEmployeeSalary() > inCompareNumber) {
+                System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
+                        employee.getEmployeeSalary());
+            }
+        }
+    }
+
+}
+
+
+
+
+
+
+
