@@ -73,7 +73,6 @@ public class EmployeeBook {
         return "Сотрудник " + maxSalaryEmployee + " имеет максимальную ЗП (" + maxSalary + ")";
     }
 
-
     public double calculateAverageSalaryValue() {
         double averageSalaryValue;
         averageSalaryValue = calculateSalarySum() / SIZE;
