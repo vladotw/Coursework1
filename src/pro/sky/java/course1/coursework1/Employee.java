@@ -4,11 +4,11 @@ public class Employee {
 
     private String employeeFio;
     private int employeeDepartment;
-    private double employeeSalary;
+    private int employeeSalary;
     private final int id;
     private static int counter;
 
-    public Employee(String fio, int department, double salary) {
+    public Employee(String fio, int department, int salary) {
         this.employeeFio = fio;
         this.employeeDepartment = department;
         this.employeeSalary = salary;
@@ -40,7 +40,7 @@ public class Employee {
         this.employeeDepartment = employeeDepartment;
     }
 
-    public void setEmployeeSalary(double employeeSalary) {
+    public void setEmployeeSalary(int employeeSalary) {
         this.employeeSalary = employeeSalary;
     }
 

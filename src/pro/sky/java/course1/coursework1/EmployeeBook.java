@@ -46,7 +46,7 @@ public class EmployeeBook {
     public String findMinSalary() {
 
         String minSalaryEmployee = null;
-        int index = 0;
+        int index;
         double minSalary = employees[0].getEmployeeSalary();
         for (int i = 1; i < employees.length; i++) {
             if (minSalary > employees[i].getEmployeeSalary()) {
@@ -61,7 +61,7 @@ public class EmployeeBook {
 
     public String findMaxSalary() {
         String maxSalaryEmployee = null;
-        int index = 0;
+        int index;
         double maxSalary = employees[0].getEmployeeSalary();
         for (int i = 1; i < employees.length; i++) {
             if (maxSalary < employees[i].getEmployeeSalary()) {
@@ -88,7 +88,8 @@ public class EmployeeBook {
     public void indexSalary() {
         double indexPercent = 0.1;
         for (Employee employee : employees) {
-            employee.setEmployeeSalary(employee.getEmployeeSalary() + employee.getEmployeeSalary() * indexPercent);
+            employee.setEmployeeSalary((int) (employee.getEmployeeSalary() +
+                    employee.getEmployeeSalary() * indexPercent));
             System.out.println(employee.getEmployeeFio() + " " + employee.getEmployeeSalary());
         }
     }
@@ -166,7 +167,8 @@ public class EmployeeBook {
         double indexPercent = inPercent / 100;
         for (Employee employee : employees) {
             if (employee.getEmployeeDepartment() == inDepartment) {
-                employee.setEmployeeSalary(employee.getEmployeeSalary() + employee.getEmployeeSalary() * indexPercent);
+                employee.setEmployeeSalary((int) (employee.getEmployeeSalary() +
+                        employee.getEmployeeSalary() * indexPercent));
 
             }
         }
@@ -218,6 +220,41 @@ public class EmployeeBook {
             return;
         }
         employees[index] = new Employee("Крюков Виталий Алексеевич", 5, 38000);
+    }
+    public void deleteEmployeeById(int id) {
+        if (id < 0 || id > 5) {
+            throw new IllegalArgumentException("Неизвестный номер отдела");
+        }
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getId() == id) {
+                employees[i] = null;
+            }
+        }
+
+    }
+
+    public void deleteEmployeeByFio(String fio) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getEmployeeFio().equals(fio)) {
+                employees[i] = null;
+            }
+        }
+    }
+
+    public void changeEmployeeByFio(String fio, int salary) {
+        for (Employee employee : employees) {
+            if (employee.getEmployeeFio().equals(fio)) {
+                employee.setEmployeeSalary(salary);
+            }
+        }
+    }
+
+    public void changeEmployeeByDep(String fio, int department) {
+        for (Employee employee : employees) {
+            if (employee.getEmployeeFio().equals(fio)) {
+                employee.setEmployeeDepartment(department);
+            }
+        }
     }
 
 
