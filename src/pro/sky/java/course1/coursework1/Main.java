@@ -29,20 +29,22 @@ public class Main {
         System.out.println();
         employeeBook.indexSalary();
         System.out.println();
-        System.out.println(employeeBook.findMinSalaryEmployeeInDep());
-        System.out.println(employeeBook.findMaxSalaryEmployeeInDep());
+        System.out.println(employeeBook.findMinSalaryEmployeeInDep(3));
+        System.out.println(employeeBook.findMaxSalaryEmployeeInDep(3));
         System.out.println();
-        System.out.println(employeeBook.calculateAverageSalaryValueInDep());
+        System.out.println(employeeBook.calculateAverageSalaryValueInDep(3));
         System.out.println();
-        System.out.println(employeeBook.calculateSalarySumInDep());
+        System.out.println(employeeBook.calculateSalarySumInDep(3));
         System.out.println();
         System.out.println();
-        employeeBook.calculateIndexEmployeeSalaryInDep();
-        employeeBook.printEmployeesListDep();
+        employeeBook.calculateIndexEmployeeSalaryInDep(3, 12);
+        employeeBook.printEmployeesListDep(3);
         System.out.println();
-        employeeBook.printEmployeesLess();
+        employeeBook.printEmployeesLess(28_000);
         System.out.println();
-        employeeBook.printEmployeesMore();
+        employeeBook.printEmployeesMore(28_000);
+        System.out.println();
+        employeeBook.createNewEmployee();
     }
 
 }

@@ -9,10 +9,6 @@ public class EmployeeBook {
 
     private final int SIZE = 10;
     private final Employee[] employees = new Employee[SIZE];
-    private final int inDepartment = 3;
-    private final int inPercent = 12;
-    private final int inCompareNumber = 28_000;
-
 
     public void addEmployee(Employee employee) {
         int index = -1;
@@ -34,7 +30,7 @@ public class EmployeeBook {
 
 
     public void printEployeesList() {
-        for (Employee employee: employees) {
+        for (Employee employee : employees) {
             System.out.println(employee);
         }
     }
@@ -99,7 +95,7 @@ public class EmployeeBook {
     }
 
 
-    public String findMinSalaryEmployeeInDep() {
+    public String findMinSalaryEmployeeInDep(int inDepartment) {
 
         int index;
         double minSalary = MAX_VALUE;
@@ -118,7 +114,7 @@ public class EmployeeBook {
                 minSalary + ")";
     }
 
-    public String findMaxSalaryEmployeeInDep() {
+    public String findMaxSalaryEmployeeInDep(int inDepartment) {
 
         int index;
         double maxSalary = MIN_VALUE;
@@ -138,7 +134,7 @@ public class EmployeeBook {
     }
 
     // Затраты на ЗП по отделу
-    public String calculateSalarySumInDep() {
+    public String calculateSalarySumInDep(int inDepartment) {
         double salarySumInDep = 0;
         for (Employee employee : employees) {
             if (employee.getEmployeeDepartment() == inDepartment) {
@@ -149,7 +145,7 @@ public class EmployeeBook {
     }
 
     // Средняя ЗП по одтелу
-    public String calculateAverageSalaryValueInDep() {
+    public String calculateAverageSalaryValueInDep(int inDepartment) {
         int index = 0;
         double sum = 0.0;
         double averageSalaryValueInDep;
@@ -167,13 +163,7 @@ public class EmployeeBook {
     }
 
     // Переиндексация ЗП по отделу
-
-
-    public double getInCompareNumber() {
-        return inCompareNumber;
-    }
-
-    public void calculateIndexEmployeeSalaryInDep() {
+    public void calculateIndexEmployeeSalaryInDep(int inDepartment, int inPercent) {
         double indexPercent = inPercent / 100;
         for (Employee employee : employees) {
             if (employee.getEmployeeDepartment() == inDepartment) {
@@ -183,7 +173,7 @@ public class EmployeeBook {
         }
     }
 
-    public void printEmployeesListDep() {
+    public void printEmployeesListDep(int inDepartment) {
         for (Employee employee : employees) {
             if (employee.getEmployeeDepartment() == inDepartment) {
                 System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
@@ -192,8 +182,8 @@ public class EmployeeBook {
         }
     }
 
-    // Вывод сотрудников с ЗП меньше полученного числа
-    public void printEmployeesLess() {
+    // Вывод сотрудников с ЗП меньше числа
+    public void printEmployeesLess(int inCompareNumber) {
         for (Employee employee : employees) {
             if (employee.getEmployeeSalary() < inCompareNumber) {
                 System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
@@ -202,8 +192,8 @@ public class EmployeeBook {
         }
     }
 
-    // Вывод сотрудников с ЗП больше полученного числа
-    public void printEmployeesMore() {
+    // Вывод сотрудников с ЗП больше числа
+    public void printEmployeesMore(int inCompareNumber) {
         for (Employee employee : employees) {
             if (employee.getEmployeeSalary() > inCompareNumber) {
                 System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
@@ -211,6 +201,26 @@ public class EmployeeBook {
             }
         }
     }
+
+    public int findFreeSpace() {
+        int index = -1;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] == null) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    public void createNewEmployee() {
+        int index = findFreeSpace();
+        if (index == -1) {
+            System.out.println("Книга заполнена.");
+            return;
+        }
+        employees[index] = new Employee("Крюков Виталий Алексеевич", 5, 38000);
+    }
+
 
 }
 
