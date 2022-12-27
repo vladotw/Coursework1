@@ -44,7 +44,15 @@ public class Main {
         System.out.println();
         employeeBook.printEmployeesMore(28_000);
         System.out.println();
-        employeeBook.createNewEmployee();
+        employeeBook.deleteEmployeeById(3);
+        System.out.println();
+        employeeBook.createNewEmployee("Крюков Кирилл Ефимович", 4, 38000);
+        System.out.println();
+        employeeBook.deleteEmployeeByFio("Сергеев Сергей Сергеевич");
+        System.out.println();
+        employeeBook.changeEmployeeSalary("Карпенко Наталья Константиновна", 35000);
+        employeeBook.changeEmployeeDep("Ким Ильдар Иннокентиевич", 3);
+        employeeBook.printEmployees();
     }
 
 }
