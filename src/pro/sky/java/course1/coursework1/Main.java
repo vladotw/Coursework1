@@ -7,40 +7,10 @@ public class Main {
 
     static int size = 10;
     static Employee[] employees = new Employee[10];
-    static int inDepartment;
-    static double inPercent;
-    static double inCompareNumber;
+    static int inDepartment = 3;
+    static int inPercent = 12;
+    static int inCompareNumber = 28_000;
 
-
-    // Получение процента индексации
-    public static double getInPercent() {
-        System.out.println("Введите процент индексации: ");
-        inPercent = in.nextDouble();
-        if (inPercent <= 0 || inPercent > 100) {
-            throw new IllegalArgumentException("Введите корректный процент индексации");
-        }
-        return inPercent;
-    }
-
-    // Получение номера отдела
-    public static int getDepartment() {
-        System.out.println("Введите номер отдела (1-5): ");
-        inDepartment = in.nextInt();
-        if (inDepartment <= 0 || inDepartment > 5) {
-            throw new IllegalArgumentException("Такого номера отдела не существует");
-        }
-        return inDepartment;
-    }
-
-    // Получение числа для сравнения
-    public static double getNumberForCompare() {
-        System.out.println("Введите число для сравнения: ");
-        inCompareNumber = in.nextDouble();
-        if (inCompareNumber <= 0) {
-            throw new IllegalArgumentException("Число должно быть > 0");
-        }
-        return inCompareNumber;
-    }
 
     static Employee addEmployee(Employee employee) {
         int index = -1;
@@ -132,7 +102,7 @@ public class Main {
     }
 
     // Минимальная ЗП в отделе
-    static String findMinSalaryEmployeeInDep() {
+    static String findMinSalaryEmployeeInDep(int inDepartment) {
 
         int index;
         double minSalary = 1000000000.0;
@@ -172,7 +142,7 @@ public class Main {
     }
 
     // Затраты на ЗП по отделу
-    static String calculateSalarySumInDep() {
+    static String calculateSalarySumInDep(int inDepartment) {
         double salarySumInDep = 0;
         for (Employee employee : employees) {
             if (employee.getEmployeeDepartment() == inDepartment) {
@@ -183,7 +153,7 @@ public class Main {
     }
 
     // Средняя ЗП по одтелу
-    static String calculateAverageSalaryValueInDep() {
+    static String calculateAverageSalaryValueInDep(int inDepartment) {
         int index = 0;
         double sum = 0.0;
         double averageSalaryValueInDep;
@@ -201,7 +171,7 @@ public class Main {
     }
 
     // Переиндексация ЗП по отделу
-    static void calculateIndexEmployeeSalaryInDep() {
+    static void calculateIndexEmployeeSalaryInDep(int inDepartment, int inPercent) {
         double indexPercent = inPercent / 100;
         for (Employee employee : employees) {
             if (employee.getEmployeeDepartment() == inDepartment) {
@@ -212,7 +182,7 @@ public class Main {
     }
 
     // Вывод списка сотрудников отдела
-    static void printEmployeesListDep() {
+    static void printEmployeesListDep(int inDepartment) {
         for (Employee employee : employees) {
             if (employee.getEmployeeDepartment() == inDepartment) {
                 System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
@@ -222,7 +192,7 @@ public class Main {
     }
 
     // Вывод сотрудников с ЗП меньше полученного числа
-    static void printEmployeesLess() {
+    static void printEmployeesLess(int inCompareNumber) {
         for (Employee employee : employees) {
             if (employee.getEmployeeSalary() < inCompareNumber) {
                 System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
@@ -232,7 +202,7 @@ public class Main {
     }
 
     // Вывод сотрудников с ЗП больше полученного числа
-    static void printEmployeesMore() {
+    static void printEmployeesMore(int inCompareNumber) {
         for (Employee employee : employees) {
             if (employee.getEmployeeSalary() > inCompareNumber) {
                 System.out.println("ID: " + employee.getId() + "; ФИО: " + employee.getEmployeeFio() + "; Оклад: " +
@@ -267,23 +237,20 @@ public class Main {
         System.out.println();
         indexSalary();
         System.out.println();
-        getDepartment();
-        System.out.println(findMinSalaryEmployeeInDep());
+        System.out.println(findMinSalaryEmployeeInDep(inDepartment));
         System.out.println(findMaxSalaryEmployeeInDep());
         System.out.println();
-        System.out.println(calculateAverageSalaryValueInDep());
+        System.out.println(calculateAverageSalaryValueInDep(inDepartment));
         System.out.println();
-        System.out.println(calculateSalarySumInDep());
+        System.out.println(calculateSalarySumInDep(inDepartment));
         System.out.println();
-        getInPercent();
         System.out.println();
-        calculateIndexEmployeeSalaryInDep();
-        printEmployeesListDep();
+        calculateIndexEmployeeSalaryInDep(inDepartment, inPercent);
+        printEmployeesListDep(inDepartment);
         System.out.println();
-        getNumberForCompare();
-        printEmployeesLess();
+        printEmployeesLess(inCompareNumber);
         System.out.println();
-        printEmployeesMore();
+        printEmployeesMore(inCompareNumber);
 
 
     }
