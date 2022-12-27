@@ -1,12 +1,8 @@
 package pro.sky.java.course1.coursework1;
 
-import java.util.Scanner;
-
 import static java.lang.Integer.*;
 
 public class EmployeeBook {
-    Scanner in = new Scanner(System.in);
-
     private final int SIZE = 10;
     private final Employee[] employees = new Employee[SIZE];
 
@@ -46,7 +42,7 @@ public class EmployeeBook {
     public String findMinSalary() {
 
         String minSalaryEmployee = null;
-        int index;
+        int index = 0;
         double minSalary = employees[0].getEmployeeSalary();
         for (int i = 1; i < employees.length; i++) {
             if (minSalary > employees[i].getEmployeeSalary()) {
@@ -61,7 +57,7 @@ public class EmployeeBook {
 
     public String findMaxSalary() {
         String maxSalaryEmployee = null;
-        int index;
+        int index = 0;
         double maxSalary = employees[0].getEmployeeSalary();
         for (int i = 1; i < employees.length; i++) {
             if (maxSalary < employees[i].getEmployeeSalary()) {
@@ -73,10 +69,9 @@ public class EmployeeBook {
         return "Сотрудник " + maxSalaryEmployee + " имеет максимальную ЗП (" + maxSalary + ")";
     }
 
+
     public double calculateAverageSalaryValue() {
-        double averageSalaryValue;
-        averageSalaryValue = calculateSalarySum() / SIZE;
-        return averageSalaryValue;
+        return calculateSalarySum() / SIZE;
     }
 
     public void printEmployeeFio() {
@@ -88,8 +83,7 @@ public class EmployeeBook {
     public void indexSalary() {
         double indexPercent = 0.1;
         for (Employee employee : employees) {
-            employee.setEmployeeSalary((int) (employee.getEmployeeSalary() +
-                    employee.getEmployeeSalary() * indexPercent));
+            employee.setEmployeeSalary((int) (employee.getEmployeeSalary() + employee.getEmployeeSalary() * indexPercent));
             System.out.println(employee.getEmployeeFio() + " " + employee.getEmployeeSalary());
         }
     }
@@ -164,11 +158,10 @@ public class EmployeeBook {
 
     // Переиндексация ЗП по отделу
     public void calculateIndexEmployeeSalaryInDep(int inDepartment, int inPercent) {
-        double indexPercent = inPercent / 100;
+        double indexPercent = (double) inPercent / 100;
         for (Employee employee : employees) {
             if (employee.getEmployeeDepartment() == inDepartment) {
-                employee.setEmployeeSalary((int) (employee.getEmployeeSalary() +
-                        employee.getEmployeeSalary() * indexPercent));
+                employee.setEmployeeSalary((int) (employee.getEmployeeSalary() + employee.getEmployeeSalary() * indexPercent));
 
             }
         }
@@ -204,13 +197,13 @@ public class EmployeeBook {
     }
 
     public int findFreeSpace() {
-        int index = -1;
+
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
-                index = i;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 
     public void createNewEmployee() {
@@ -221,16 +214,14 @@ public class EmployeeBook {
         }
         employees[index] = new Employee("Крюков Виталий Алексеевич", 5, 38000);
     }
+
     public void deleteEmployeeById(int id) {
-        if (id < 0 || id > 5) {
-            throw new IllegalArgumentException("Неизвестный номер отдела");
-        }
+
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getId() == id) {
                 employees[i] = null;
             }
         }
-
     }
 
     public void deleteEmployeeByFio(String fio) {
@@ -241,23 +232,33 @@ public class EmployeeBook {
         }
     }
 
-    public void changeEmployeeByFio(String fio, int salary) {
+    public void changeEmployeeSalary(String fio, int salary) {
         for (Employee employee : employees) {
-            if (employee.getEmployeeFio().equals(fio)) {
+            if (employee != null && employee.getEmployeeFio().equals(fio)) {
                 employee.setEmployeeSalary(salary);
             }
         }
     }
 
-    public void changeEmployeeByDep(String fio, int department) {
+    public void changeEmployeeDep(String fio, int department) {
         for (Employee employee : employees) {
-            if (employee.getEmployeeFio().equals(fio)) {
+            if (employee != null && employee.getEmployeeFio().equals(fio)) {
                 employee.setEmployeeDepartment(department);
             }
         }
     }
 
+    public void printEmployees() {
 
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Отдел " + i + " :");
+            for (Employee employee : employees) {
+                if (employee != null && employee.getEmployeeDepartment() == i) {
+                    System.out.println(employee.getEmployeeFio());
+                }
+            }
+        }
+    }
 }
 
 
